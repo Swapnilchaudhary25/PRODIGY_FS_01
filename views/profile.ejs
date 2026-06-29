@@ -1,0 +1,37 @@
+<%- include('partials/header', { title: 'Profile - SecureAuth' }) %>
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>👤 My Profile</h1>
+  </div>
+
+  <div class="profile-card">
+    <div class="profile-avatar">
+      <%= user.name.charAt(0).toUpperCase() %>
+    </div>
+    <div class="profile-info">
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-user"></i> Full Name</span>
+        <span class="info-value"><%= user.name %></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-envelope"></i> Email</span>
+        <span class="info-value"><%= user.email %></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-shield-alt"></i> Role</span>
+        <span class="info-value"><span class="badge badge-<%= user.role %>"><%= user.role.toUpperCase() %></span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-calendar"></i> Member Since</span>
+        <span class="info-value"><%= new Date(user.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+      </div>
+    </div>
+    <div class="profile-actions">
+      <a href="/dashboard" class="btn btn-outline">← Back to Dashboard</a>
+      <a href="/auth/logout" class="btn btn-danger">Logout</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

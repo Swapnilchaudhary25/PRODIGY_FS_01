@@ -1,0 +1,47 @@
+<%- include('partials/header', { title: 'Dashboard - SecureAuth' }) %>
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>👋 Welcome, <%= user.name %>!</h1>
+    <p>You are logged in as <span class="badge badge-<%= user.role %>"><%= user.role.toUpperCase() %></span></p>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <div class="card-icon">👤</div>
+      <h3>Your Profile</h3>
+      <p>View and manage your account details</p>
+      <a href="/dashboard/profile" class="btn btn-sm">View Profile</a>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">🔒</div>
+      <h3>Account Security</h3>
+      <p>Your account is protected with bcrypt hashed passwords</p>
+      <span class="status-badge secure">🟢 Secure</span>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-icon">🎫</div>
+      <h3>Active Session</h3>
+      <p>You have an active authenticated session</p>
+      <a href="/auth/logout" class="btn btn-sm btn-danger">End Session</a>
+    </div>
+
+    <% if (user.role === 'admin') { %>
+    <div class="dashboard-card admin-card">
+      <div class="card-icon">👑</div>
+      <h3>Admin Panel</h3>
+      <p>Manage all registered users (Admin only)</p>
+      <a href="/dashboard/admin" class="btn btn-sm btn-admin">Go to Admin</a>
+    </div>
+    <% } %>
+  </div>
+
+  <div class="info-box">
+    <h3>🛡️ Protected Route</h3>
+    <p>This page is only accessible to authenticated users. Unauthenticated requests are automatically redirected to the login page by the <code>ensureAuthenticated</code> middleware.</p>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

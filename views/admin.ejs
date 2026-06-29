@@ -1,0 +1,42 @@
+<%- include('partials/header', { title: 'Admin Panel - SecureAuth' }) %>
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>👑 Admin Panel</h1>
+    <p>All registered users — <strong><%= users.length %></strong> total</p>
+  </div>
+
+  <div class="admin-table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Joined</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((u, i) => { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td>
+            <div class="user-cell">
+              <span class="mini-avatar"><%= u.name.charAt(0).toUpperCase() %></span>
+              <%= u.name %>
+            </div>
+          </td>
+          <td><%= u.email %></td>
+          <td><span class="badge badge-<%= u.role %>"><%= u.role.toUpperCase() %></span></td>
+          <td><%= new Date(u.createdAt).toLocaleDateString() %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <a href="/dashboard" class="btn btn-outline" style="margin-top:1.5rem">← Back to Dashboard</a>
+</div>
+
+<%- include('partials/footer') %>
